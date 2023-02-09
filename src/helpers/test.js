@@ -1,6 +1,6 @@
 export const loading = () => {
   const load = document.querySelector('.loading');
-  load.innerText = 'carregando...';
+  load.innerText = 'loading...';
 };
 
 export const loadComplete = () => {

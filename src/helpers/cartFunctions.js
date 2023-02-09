@@ -3,7 +3,7 @@ export const getSavedCartIds = () => {
   return cartProducts ? JSON.parse(cartProducts) : [];
 };
 
-export const saveCardId = (id) => {
+export const saveCartId = (id) => {
   if(!id) throw new Error('Please enter a valid ID');
 
   const cartProducts = getSavedCartIds();
@@ -11,7 +11,7 @@ export const saveCardId = (id) => {
   localStorage.setItem('cartProducts', JSON.stringify(newCartProducts));
 };
 
-export const removeCardId = async (id) => {
+export const removeCartId = async (id) => {
   if (!id) throw new Error('Please enter a valid ID');
 
   const cartProducts = getSavedCartIds();

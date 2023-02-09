@@ -1,6 +1,6 @@
-import { getSavedCartIds, saveCardId, removeCartId } from './cartFunctions';
-import { loading, loadComplete, errorAPI } from './test';
-import { fetchProduct, fetchProductList } from './fetchFunctions';
+import { getSavedCartIds, saveCartId, removeCartId } from './cartFunctions.js';
+import { loading, loadComplete, errorAPI } from './test.js';
+import { fetchProduct, fetchProductsList } from './fetchFunctions.js';
 
 const cart = document.querySelector('.cart__products');
 let total = 0;
@@ -24,10 +24,10 @@ const reload = () => {
 };
 
 const createProductImage = (image) => {
-  const img = document.createElement('img');
-  img.className = 'product__image';
-  img.src = imageSource.replace('I.jpg', 'O.jpg');
-  return img;
+  const createImage = document.createElement('img');
+  createImage.className = 'product__image';
+  createImage.src = image.replace('I.jpg', 'O.jpg');
+  return createImage;
 };
 
 export const createCustomElement = (element, className, innerText = '') => {
@@ -47,12 +47,7 @@ const removeCartProduct = (li, id) => {
   reload();
 };
 
-export const createCartProductElement = ({
-  id,
-  title,
-  price,
-  pictures,
-}) => {
+export const createCartProductElement = ({ id, title, price, pictures }) => {
   const li = document.createElement('li');
   li.className = 'cart__product';
   const imageContainer = createCustomElement('div', 'cart__product__image-container');
@@ -102,12 +97,7 @@ const addCarrinho = async (param) => {
   carrinho();
 };
 
-export const createProductElement = ({
-  id,
-  title,
-  thumbnail,
-  price,
-}) => {
+export const createProductElement = ({ id, title, thumbnail, price }) => {
   const section = document.createElement('section');
   section.className = 'product';
 
@@ -132,7 +122,7 @@ export const createProductElement = ({
 
   cartButton.addEventListener('click', async () => {
     const productId = section.firstChild.innerText;
-    saveCardId(productId);
+    saveCartId(productId);
     addCarrinho(id);
   });
 
@@ -143,7 +133,7 @@ export const productList = async (param) => {
   const list = document.querySelector('.products');
   loading();
   try {
-    const itens = await fetchProductList(param);
+    const itens = await fetchProductsList(param);
     itens.forEach(async (product) => {
       const listProducts = createProductElement(product);
       list.appendChild(listProducts);
